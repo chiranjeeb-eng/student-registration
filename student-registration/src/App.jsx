@@ -1,27 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 
 function App() {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [course, setCourse] = useState("");
 
-  const [student, setStudent] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setStudent({
-      name: name,
-      email: email,
-      course: course
-    });
+    navigate("/success");
   };
 
   return (
     <div className="container">
-
       <div className="form-box">
 
         <h1>Student Registration Form</h1>
@@ -34,6 +28,7 @@ function App() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter your name"
+            required
           />
 
           <label>Email</label>
@@ -42,12 +37,14 @@ function App() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
+            required
           />
 
           <label>Course</label>
           <select
             value={course}
             onChange={(e) => setCourse(e.target.value)}
+            required
           >
             <option value="">Select Course</option>
             <option value="B.Tech">B.Tech</option>
@@ -61,20 +58,7 @@ function App() {
 
         </form>
 
-        {student && (
-          <div className="student-details">
-
-            <h2>Submitted Student Details</h2>
-
-            <p>Name: {student.name}</p>
-            <p>Email: {student.email}</p>
-            <p>Course: {student.course}</p>
-
-          </div>
-        )}
-
       </div>
-
     </div>
   );
 }
